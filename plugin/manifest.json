@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+  "name": "VRTL Reader",
+  "version": "1.0.0",
+  "description": "在 Zotero 内置 PDF 阅读器中以竖排书序阅读：双页对开、页序从右往左，配合窗口内沉浸式全屏。批注完全沿用 Zotero 原生实现。Ctrl+Shift+V 切换竖排，F11 切换全屏。",
+  "author": "Boschiffer",
+  "homepage_url": "https://github.com/boschiffer/zotero-vrtl-reader",
+  "applications": {
+    "zotero": {
+      "id": "vrtl-reader@boschiffer.github.io",
+      "update_url": "https://raw.githubusercontent.com/boschiffer/zotero-vrtl-reader/main/updates.json",
+      "strict_min_version": "9.0.3",
+      "strict_max_version": "11.*.*"
+    }
+  }
+}
