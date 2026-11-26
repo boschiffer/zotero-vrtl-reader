@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "VRTL Reader",
-  "version": "1.0.0",
-  "description": "在 Zotero 内置 PDF 阅读器中以竖排书序阅读：双页对开、页序从右往左，配合窗口内沉浸式全屏。批注完全沿用 Zotero 原生实现。Ctrl+Shift+V 切换竖排，F11 切换全屏。",
+  "name": "ZotRead++",
+  "version": "1.1.0",
+  "description": "在 Zotero 内置 PDF 阅读器中以竖排书序阅读：双页对开、页序从右往左，配合窗口内沉浸式全屏，并一键打开绑定了 ZotFlow 的 Obsidian 库。批注完全沿用 Zotero 原生实现。Ctrl+Shift+V 切换竖排，F11 切换全屏。",
   "author": "Boschiffer",
   "homepage_url": "https://github.com/boschiffer/zotero-vrtl-reader",
   "applications": {

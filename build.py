@@ -11,7 +11,7 @@ DIST = ROOT / "dist"
 
 manifest = json.loads((SRC / "manifest.json").read_text(encoding="utf8"))
 version = manifest["version"]
-out = DIST / f"vrtl-reader-{version}.xpi"
+out = DIST / f"zotread-plus-{version}.xpi"
 DIST.mkdir(exist_ok=True)
 
 FILES = ["manifest.json", "bootstrap.js"]
