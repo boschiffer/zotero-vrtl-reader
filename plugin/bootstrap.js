@@ -519,29 +519,17 @@ function endImmersive(win) {
  * Support，Linux 是 ~/.config），本插件只读这张表，不碰 vault 里的任何文件。
  */
 function obsidianConfig() {
-	let tries = [];
+	let dir = null;
 	try {
-		tries.push(Services.dirsvc.get("UAppD", Ci.nsIFile));   // Win: %APPDATA% / mac: ~/Library/Application Support
+		// Win: %APPDATA%，macOS: ~/Library/Application Support，Linux: ~/.config
+		dir = Services.dirsvc.get("UAppData", Ci.nsIFile);
+		dir.append("obsidian");
+		dir.append("obsidian.json");
 	}
-	catch (e) {}
-	try {
-		let home = Services.dirsvc.get("Home", Ci.nsIFile);
-		let cfg = home.clone();
-		cfg.append(".config");   // Linux
-		tries.push(cfg);
+	catch (e) {
+		return null;
 	}
-	catch (e) {}
-	for (let dir of tries) {
-		try {
-			dir.append("obsidian");
-			dir.append("obsidian.json");
-			if (dir.exists()) {
-				return dir;
-			}
-		}
-		catch (e) {}
-	}
-	return null;
+	return dir.exists() ? dir : null;
 }
 
 function readTextFile(file) {
@@ -609,12 +597,8 @@ function pickVault(list) {
 	if (list.length === 1) {
 		return list[0].name;
 	}
-	let items = Cc["@mozilla.org/supports-array;1"].createInstance(Ci.nsISupportsArray);
-	for (let v of list) {
-		let s = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
-		s.data = v.name + '　' + v.path;
-		items.AppendElement(s);
-	}
+	// Gecko 140 的 nsIPromptService.select 直接收字符串数组（旧的 nsISupportsArray 早就不用了）
+	let items = list.map((v) => v.name + '　' + v.path);
 	let sel = { value: 0 };
 	if (!Services.prompt.select(null, 'ZotRead++', '选择要打开的 Obsidian 库（已装 ZotFlow）：', items, sel)) {
 		return '';
